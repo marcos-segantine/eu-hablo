@@ -1,1 +1,90 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    --primary-color: #202124;
+    --secondary-color: #757575;
+    --ternary-color: #FAFAFA;
+
+    --text-color: #e1e1e1;
+
+    --border-radius-small: 10px;
+    --border-radius-medium: 20px;
+    --border-radius-large: 50%;
+
+    --font-size-very-tiny: 0.8rem;
+    --font-size-tiny: 0.92rem;
+    --font-size-small: 1rem;
+    --font-size-medium: 1.8rem;
+    --font-size-large: 2.5rem;
+    --font-size-very-large: 3rem;
+
+    --font-family-bold: "Manrope-Bold";
+    --font-family-regular: "Manrope-Regular";
+    --font-family-medium: "Manrope-Medium";
+}
+
+@font-face {
+    font-family: "Manrope-Bold";
+    src: url("/assets/fonts/Manrope-Bold.ttf");
+}
+
+@font-face {
+    font-family: "Manrope-Regular";
+    src: url("/assets/fonts/Manrope-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Manrope-Medium";
+    src: url("/assets/fonts/Manrope-Medium.ttf");
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--primary-color);
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: "Manrope-Bold";
+}
+
+h1 {
+    font-size: var(--font-size-very-large);
+}
+
+h2 {
+    font-size: var(--font-size-large);
+}
+
+h3 {
+    font-size: var(--font-size-medium);
+}
+
+h4 {
+    font-size: var(--font-size-small);
+}
+
+p,
+span {
+    font-family: "Manrope-Regular";
+    font-size: var(--font-size-tiny);
+}
+
+a {
+    text-decoration: none;
+    color: currentColor;
+    font-family: 'Manrope-Bold';
+}
+
+li {
+    list-style: none;
+}
+
+.container {
+    min-height: 100vh;
+}
