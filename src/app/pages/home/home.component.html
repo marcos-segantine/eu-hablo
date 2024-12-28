@@ -1,3 +1,17 @@
 <div class="container">
-    <app-input />
+  <!-- <app-input /> -->
+
+  <div class="content">
+    <div class="controlers">
+      <button #startBtn (click)="onStartButtonClick()">Iniciar Reconhecimento de Fala</button>
+      <select #languageSelect>
+        <option value="pt-BR">Português</option>
+        <option value="en-US">Inglês</option>
+        <option value="it-IT">Italiano</option>
+        <option value="es-ES">Espanhol</option>
+      </select>
+    </div>
+    <div id="transcription" #transcription>
+    </div>
+  </div>
 </div>
