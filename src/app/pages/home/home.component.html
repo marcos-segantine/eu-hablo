@@ -3,7 +3,8 @@
 
   <div class="content">
     <div class="controlers">
-      <button #startBtn (click)="onStartButtonClick()">Iniciar Reconhecimento de Fala</button>
+      <button #startBtn (mousedown)="onStartButtonClick()" (mouseup)="stopRecord()">Iniciar Reconhecimento de
+        Fala</button>
       <select #languageSelect>
         <option value="pt-BR">Português</option>
         <option value="en-US">Inglês</option>
@@ -13,10 +14,9 @@
     </div>
     <div id="transcription" #transcription>
     </div>
-    <button (click)="synthesizeText()">RUN FUNCTION</button>
 
     @if (audioUrl) {
-      <audio [src]="audioUrl" controls></audio>
+    <audio [src]="audioUrl" controls></audio>
     }
   </div>
 </div>

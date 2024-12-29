@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   private interimTranscript = '';
   private text = '';
   private language: "pt-BR" | "en-US" | "it-IT" | "es-ES" | "fr-FR" = 'en-US';
+  private holdTimeout: any;
 
   private textToSynthesize = '';
   audioUrl: string | null = null;
@@ -50,11 +51,19 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   onStartButtonClick(): void {
-    if (this.languageSelect) {
-      this.language = this.languageSelect.nativeElement.value;
-      this.recognition.lang = this.language;
-      this.recognition.start();
-    }
+    this.holdTimeout = setTimeout(() => {
+      if (this.languageSelect) {
+        this.language = this.languageSelect.nativeElement.value;
+        this.recognition.lang = this.language;
+        this.recognition.start();
+      }
+    }, 1000);
+  }
+
+  stopRecord() {
+    this.recognition.stop();
+    clearTimeout(this.holdTimeout);
+    this.synthesizeText();
   }
 
   onResult(event: any): void {
