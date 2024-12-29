@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 
 import { InputComponent } from '../../components/input/input.component';
+import { SpeechService } from '../../services/text-to-speech.service';
 
 declare const webkitSpeechRecognition: any;
 
@@ -18,6 +19,13 @@ export class HomeComponent implements OnInit, OnDestroy {
   private recognition: any;
   private finalTranscript = '';
   private interimTranscript = '';
+  private text = '';
+  private language: "pt-BR" | "en-US" | "it-IT" | "es-ES" | "fr-FR" = 'en-US';
+
+  private textToSynthesize = '';
+  audioUrl: string | null = null;
+
+  constructor(private speechService: SpeechService) { }
 
   ngOnInit(): void {
     if ('webkitSpeechRecognition' in window) {
@@ -43,8 +51,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   onStartButtonClick(): void {
     if (this.languageSelect) {
-      const selectedLanguage = this.languageSelect.nativeElement.value;
-      this.recognition.lang = selectedLanguage;
+      this.language = this.languageSelect.nativeElement.value;
+      this.recognition.lang = this.language;
       this.recognition.start();
     }
   }
@@ -59,10 +67,9 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.interimTranscript += transcript + ' ';
       }
     }
-    
-    const result = this.finalTranscript || this.interimTranscript;
 
-    this.transcriptionElement.nativeElement.innerHTML = result;
+    this.text = this.finalTranscript || this.interimTranscript;
+    this.transcriptionElement.nativeElement.innerHTML = this.text;
   }
 
   onEnd(): void {
@@ -71,5 +78,17 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   onError(event: any): void {
     console.error('Erro no reconhecimento de fala: ', event.error);
+  }
+
+  synthesizeText() {
+    if (!this.text.trim()) return;
+
+    this.speechService.synthesizeTextToSpeech(this.text.trim(), this.language)
+      .then((audioBlob) => {
+        this.audioUrl = URL.createObjectURL(audioBlob);
+      })
+      .catch((error) => {
+        console.error('Error during synthesis:', error);
+      });
   }
 }

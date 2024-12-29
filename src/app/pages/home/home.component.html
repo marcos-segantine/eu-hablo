@@ -13,5 +13,10 @@
     </div>
     <div id="transcription" #transcription>
     </div>
+    <button (click)="synthesizeText()">RUN FUNCTION</button>
+
+    @if (audioUrl) {
+      <audio [src]="audioUrl" controls></audio>
+    }
   </div>
 </div>

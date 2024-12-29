@@ -45,6 +45,10 @@ button {
     padding: 1rem;
 }
 
+audio {
+    visibility: hidden;
+}
+
 #transcription {
     color: var(--text-color);
     font-size: var(--font-size-small);
