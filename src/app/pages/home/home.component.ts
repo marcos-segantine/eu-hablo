@@ -61,6 +61,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   stopRecord() {
+    console.log("stopRecord");
+    
     this.recognition.stop();
     clearTimeout(this.holdTimeout);
     this.synthesizeText();
@@ -95,6 +97,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.speechService.synthesizeTextToSpeech(this.text.trim(), this.language)
       .then((audioBlob) => {
         this.audioUrl = URL.createObjectURL(audioBlob);
+
+        this.text = ""
+        this.finalTranscript = ""
+        this.interimTranscript = "";
+        this.transcriptionElement.nativeElement.innerHTML = "";
       })
       .catch((error) => {
         console.error('Error during synthesis:', error);
