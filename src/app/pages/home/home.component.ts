@@ -1,13 +1,13 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 
-import { InputComponent } from '../../components/input/input.component';
 import { SpeechService } from '../../services/text-to-speech.service';
+import { ChatService } from '../../services/chat.service';
 
 declare const webkitSpeechRecognition: any;
 
 @Component({
   selector: 'app-home',
-  imports: [InputComponent],
+  imports: [],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   private textToSynthesize = '';
   audioUrl: string | null = null;
 
-  constructor(private speechService: SpeechService) { }
+  constructor(private speechService: SpeechService, private chatService: ChatService) { }
 
   ngOnInit(): void {
     if ('webkitSpeechRecognition' in window) {
@@ -62,10 +62,15 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   stopRecord() {
     console.log("stopRecord");
-    
+
     this.recognition.stop();
     clearTimeout(this.holdTimeout);
-    this.synthesizeText();
+
+    this.chatService.getResponse(this.text).then(response => {
+      if (response.content) {
+        this.synthesizeText(response.content);
+      }
+    });
   }
 
   onResult(event: any): void {
@@ -91,10 +96,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     console.error('Erro no reconhecimento de fala: ', event.error);
   }
 
-  synthesizeText() {
+  synthesizeText(textToSynthesize: string): void {
     if (!this.text.trim()) return;
 
-    this.speechService.synthesizeTextToSpeech(this.text.trim(), this.language)
+    this.speechService.synthesizeTextToSpeech(textToSynthesize, this.language)
       .then((audioBlob) => {
         this.audioUrl = URL.createObjectURL(audioBlob);
 

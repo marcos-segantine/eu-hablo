@@ -48,11 +48,11 @@ export class SpeechService {
       case 'en-US':
         return "en-US-CoraNeural";
       case 'it-IT':
-        return 'it-IT-FabiolaNeural';
+        return 'it-IT-PalmiraNeural';
       case 'es-ES':
         return 'es-ES-EstrellaNeural';
       case 'fr-FR':
-        return 'fr-FR-DeniseNeural';
+        return 'fr-FR-YvetteNeural';
       default:
         return "en-US-CoraNeural";
     }
