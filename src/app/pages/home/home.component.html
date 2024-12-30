@@ -1,6 +1,8 @@
 <div class="container">
   <!-- <app-input /> -->
 
+  <app-talking-effect [audioURL]="audioUrl" [showAnimation]="runAnimation" (event)="stopAnimation()" />
+
   <div class="content">
     <div class="controlers">
       <button #startBtn (mousedown)="onStartButtonClick()" (mouseup)="stopRecord()">Iniciar Reconhecimento de
@@ -14,9 +16,5 @@
     </div>
     <div id="transcription" #transcription>
     </div>
-
-    @if (audioUrl) {
-    <audio [src]="audioUrl" controls></audio>
-    }
   </div>
 </div>

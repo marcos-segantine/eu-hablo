@@ -3,11 +3,13 @@ import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/co
 import { SpeechService } from '../../services/text-to-speech.service';
 import { ChatService } from '../../services/chat.service';
 
+import { TalkingEffectComponent } from '../../components/talking-effect/talking-effect.component';
+
 declare const webkitSpeechRecognition: any;
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [TalkingEffectComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -25,6 +27,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   private textToSynthesize = '';
   audioUrl: string | null = null;
+  runAnimation: boolean = false;
 
   constructor(private speechService: SpeechService, private chatService: ChatService) { }
 
@@ -102,6 +105,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.speechService.synthesizeTextToSpeech(textToSynthesize, this.language)
       .then((audioBlob) => {
         this.audioUrl = URL.createObjectURL(audioBlob);
+        this.runAnimation = true;
 
         this.text = ""
         this.finalTranscript = ""
@@ -111,5 +115,9 @@ export class HomeComponent implements OnInit, OnDestroy {
       .catch((error) => {
         console.error('Error during synthesis:', error);
       });
+  }
+
+  stopAnimation(): void {
+    this.runAnimation = false;
   }
 }
