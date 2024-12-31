@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import * as SpeechSDK from 'microsoft-cognitiveservices-speech-sdk';
 
-import { environment } from '../config/enviroment';
+import {environment} from"../config/environment"
 
 @Injectable({
   providedIn: 'root'

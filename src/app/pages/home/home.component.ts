@@ -70,8 +70,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     clearTimeout(this.holdTimeout);
 
     this.chatService.getResponse(this.text).then(response => {
-      if (response.content) {
-        this.synthesizeText(response.content);
+      if (response !== null) {
+        this.synthesizeText(response);
+      }
+      else {
+        console.log("error ocurred");
       }
     });
   }
