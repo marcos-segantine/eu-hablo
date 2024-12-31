@@ -1,9 +1,10 @@
 <div class="audio-container">
-    <div class="rect {{ showAnimation() && 'animation' }}"></div>
-    <div class="rect {{ showAnimation() && 'animation' }}"></div>
-    <div class="rect {{ showAnimation() && 'animation' }}"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
     <div class="controls">
-        <button onclick="startAnimation()">Iniciar Áudio</button>
-        <audio id="audio" [src]="audioURL()" preload="auto"></audio>
+        <button>Iniciar Áudio</button>
+        <audio id="audio" [src]="audioURL" preload="auto"></audio>
     </div>
 </div>
