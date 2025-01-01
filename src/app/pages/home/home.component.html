@@ -1,12 +1,16 @@
 <div class="container">
-  <!-- <app-input /> -->
-
   <app-talking-effect [audioURL]="audioUrl" [showAnimation]="runAnimation" (event)="stopAnimation()" />
 
   <div class="content">
     <div class="controlers">
-      <button #startBtn (mousedown)="onStartButtonClick()" (mouseup)="stopRecord()">Iniciar Reconhecimento de
-        Fala</button>
+      <div class="contains-micro-indicator">
+        <button #startBtn (mousedown)="onStartButtonClick()" (mouseup)="stopRecord()">
+          <img src="/assets/images/microfone.svg" alt="">
+        </button>
+        <span [style.animationDuration.s]="runMicroAnimation ? .8 : 0"></span>
+        <span [style.animationDuration.s]="runMicroAnimation ? 1.8 : 0"></span>
+
+      </div>
       <select #languageSelect>
         <option value="pt-BR">Português</option>
         <option value="en-US">Inglês</option>

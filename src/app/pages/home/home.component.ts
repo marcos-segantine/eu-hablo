@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   private textToSynthesize = '';
   audioUrl: string | null = null;
   runAnimation: boolean = false;
+  runMicroAnimation = false;
 
   constructor(private speechService: SpeechService, private chatService: ChatService) { }
 
@@ -47,7 +48,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // Limpa recursos ao destruir o componente
     if (this.recognition) {
       this.recognition.stop();
     }
@@ -55,6 +55,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   onStartButtonClick(): void {
     this.holdTimeout = setTimeout(() => {
+      this.runMicroAnimation = true;
+
       if (this.languageSelect) {
         this.language = this.languageSelect.nativeElement.value;
         this.recognition.lang = this.language;
@@ -64,6 +66,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   stopRecord() {
+    this.runMicroAnimation = false;
     console.log("stopRecord");
 
     this.recognition.stop();
