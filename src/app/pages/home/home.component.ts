@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   private textToSynthesize = '';
   audioUrl: string | null = null;
   runAnimation: boolean = false;
-  runMicroAnimation = false;
+  isRecording = false;
 
   constructor(private speechService: SpeechService, private chatService: ChatService) { }
 
@@ -54,20 +54,25 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   onStartButtonClick(): void {
-    this.holdTimeout = setTimeout(() => {
-      this.runMicroAnimation = true;
-
+    if (this.isRecording === false) {
+      this.isRecording = true;
+  
       if (this.languageSelect) {
         this.language = this.languageSelect.nativeElement.value;
         this.recognition.lang = this.language;
+        this.recognition.continuous = true;
+        this.recognition.interimResults = true;
+  
         this.recognition.start();
       }
-    }, 1000);
+    }
+    else {
+      this.stopRecord();
+    }
   }
 
   stopRecord() {
-    this.runMicroAnimation = false;
-    console.log("stopRecord");
+    this.isRecording = false;
 
     this.recognition.stop();
     clearTimeout(this.holdTimeout);

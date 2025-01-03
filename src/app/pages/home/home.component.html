@@ -4,11 +4,11 @@
   <div class="content">
     <div class="controlers">
       <div class="contains-micro-indicator">
-        <button #startBtn (mousedown)="onStartButtonClick()" (mouseup)="stopRecord()">
+        <button #startBtn (click)="onStartButtonClick()">
           <img src="/assets/images/microfone.svg" alt="">
         </button>
-        <span [style.animationDuration.s]="runMicroAnimation ? .8 : 0"></span>
-        <span [style.animationDuration.s]="runMicroAnimation ? 1.8 : 0"></span>
+        <span [style.animationDuration.s]="isRecording ? .8 : 0"></span>
+        <span [style.animationDuration.s]="isRecording ? 1.8 : 0"></span>
 
       </div>
       <select #languageSelect>

@@ -30,8 +30,6 @@ export class TalkingEffectComponent implements OnInit, OnChanges {
 
     audio.onloadedmetadata = async () => {
       const duration = audio.duration;
-      console.log('Audio duration:', duration);
-
       await this.sleep(duration * 1000);
 
       this.emitEvent();
