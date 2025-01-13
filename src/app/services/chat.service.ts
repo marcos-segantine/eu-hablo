@@ -4,11 +4,11 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ChatService {
-  async getResponse(userText: string) {
-    const baseUrl = "https://euhablo-chat.azurewebsites.net/api/EuHabloChart?";
+  async getResponse(userText: string, conversationHistory: Array<Record<string, string>>): Promise<string | null> {
+    const baseUrl = "https://euhablo-chat.azurewebsites.net/api/euhablochart?";
 
-    const url = `${baseUrl}text=${encodeURIComponent(userText)}`;
-
+    const url = `${baseUrl}text=${encodeURIComponent(userText)}&conversationHistory=${encodeURIComponent(JSON.stringify(conversationHistory))}`;
+    
     try {
       const response = await fetch(url, {
         method: "GET",

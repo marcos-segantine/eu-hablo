@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   private text = '';
   private language: "pt-BR" | "en-US" | "it-IT" | "es-ES" | "fr-FR" = 'en-US';
   private holdTimeout: any;
+  private conversationHistory: Array<Record<string, string>> = [];
 
   private textToSynthesize = '';
   audioUrl: string | null = null;
@@ -56,13 +57,13 @@ export class HomeComponent implements OnInit, OnDestroy {
   onStartButtonClick(): void {
     if (this.isRecording === false) {
       this.isRecording = true;
-  
+
       if (this.languageSelect) {
         this.language = this.languageSelect.nativeElement.value;
         this.recognition.lang = this.language;
         this.recognition.continuous = true;
         this.recognition.interimResults = true;
-  
+
         this.recognition.start();
       }
     }
@@ -77,7 +78,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.recognition.stop();
     clearTimeout(this.holdTimeout);
 
-    this.chatService.getResponse(this.text).then(response => {
+    this.chatService.getResponse(this.text, this.conversationHistory).then(response => {
+      this.conversationHistory.push({ user: this.text });
+      this.conversationHistory.push({ assistant: response as string });
+
       if (response !== null) {
         this.synthesizeText(response);
       }
