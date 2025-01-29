@@ -22,12 +22,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   private assistantResponse: string = "";
   private finalTranscript = '';
   private interimTranscript = '';
-  private text = '';
   private language: "pt-BR" | "en-US" | "it-IT" | "es-ES" | "fr-FR" = 'en-US';
   private holdTimeout: any;
+  text = '';
   conversationHistory: Array<Record<string, string>> = [];
 
-  private textToSynthesize = '';
   audioUrl: string | null = null;
   runAnimation: boolean = false;
   isRecording = false;

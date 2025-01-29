@@ -60,13 +60,12 @@ export class TalkingEffectComponent implements OnInit, OnChanges {
 
         const animateCircles = () => {
           analyser.getByteFrequencyData(dataArray);
-
-          circles.forEach((circle, index) => {
+            circles.forEach((circle, index) => {
             if (index < dataArray.length) {
-              const height = (dataArray[index] / 255) * 100;
-              circle.style.height = `${Math.max(10, height)}px`;
+              const height = (dataArray[index] / 255) * 50;
+              circle.style.height = `${Math.max(5, height)}px`;
             }
-          });
+            });
 
           this.animationFrameId = requestAnimationFrame(animateCircles);
         };

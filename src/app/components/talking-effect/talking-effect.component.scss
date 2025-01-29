@@ -4,6 +4,10 @@
     gap: .5rem;
 
     min-height: 5rem;
+    padding: 1rem;
+    border-radius: var(--border-radius-small);
+
+    background-color: var(--ternary-color);
 }
 
 .circle {

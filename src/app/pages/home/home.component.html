@@ -7,19 +7,22 @@
 
     <div id="messages" class="messages">
       @for (message of conversationHistory; track message) {
-        @if (message.hasOwnProperty("user")) {
-          <div class="contains-user-message">
-            <div class="user-message">
-              <p>{{ message["user"] }}</p>
-            </div>
-          </div>
-        }
-        @else {
-          <p class="assistant-message">{{ message["assistant"] }}</p>
-          }
-          }          
-
-      <div id="transcription" #transcription></div>
+      @if (message.hasOwnProperty("user")) {
+      <div class="contains-user-message">
+        <div class="user-message">
+          <p>{{ message["user"] }}</p>
+        </div>
+      </div>
+      }
+      @else {
+      <p class="assistant-message">{{ message["assistant"] }}</p>
+      }
+      }
+      @if (isRecording) {
+        <div class="contains-transcription">
+          <div id="transcription" class="user-message" #transcription></div>
+        </div>        
+      }
     </div>
   </div>
 
