@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   private text = '';
   private language: "pt-BR" | "en-US" | "it-IT" | "es-ES" | "fr-FR" = 'en-US';
   private holdTimeout: any;
-  private conversationHistory: Array<Record<string, string>> = [];
+  conversationHistory: Array<Record<string, string>> = [];
 
   private textToSynthesize = '';
   audioUrl: string | null = null;

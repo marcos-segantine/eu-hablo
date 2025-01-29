@@ -2,18 +2,24 @@
 
   <div class="content">
     <app-talking-effect [audioURL]="audioUrl" [showAnimation]="runAnimation" (event)="stopAnimation()" />
-    
+
     <span class="line"></span>
-    
-    <div class="messages">
-      <p class="bot-message">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur, asperiores.
-      </p>
-      <div class="contains-user-message">
-        <p class="user-message">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur, asperiores.
-        </p>
-      </div>
+
+    <div id="messages" class="messages">
+      @for (message of conversationHistory; track message) {
+        @if (message.hasOwnProperty("user")) {
+          <div class="contains-user-message">
+            <div class="user-message">
+              <p>{{ message["user"] }}</p>
+            </div>
+          </div>
+        }
+        @else {
+          <p class="assistant-message">{{ message["assistant"] }}</p>
+        }
+      }
+
+      <div id="transcription" #transcription></div>
     </div>
   </div>
 
@@ -35,7 +41,5 @@
         <option value="es-ES">Espanhol</option>
       </select>
     </div>
-
-    <div id="transcription" #transcription></div>
   </div>
 </div>
