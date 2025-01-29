@@ -1,8 +1,9 @@
 :root {
-    --primary-color: #202124;
-    --secondary-color: #757575;
-    --ternary-color: #FAFAFA;
+    --primary-color: #23022E;
+    --secondary-color: #573280;
+    --ternary-color: #ADA8B6;
 
+    --bg-color: #E6E6E6;
     --text-color: #e1e1e1;
 
     --border-radius-small: 10px;
@@ -43,7 +44,7 @@
 }
 
 body {
-    background-color: var(--primary-color);
+    background-color: var(--bg-color);
 }
 
 h1,
