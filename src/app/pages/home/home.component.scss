@@ -13,14 +13,19 @@
 }
 
 .content {
+    position: relative;
+
     border: solid 1px var(--ternary-color);
     border-radius: var(--border-radius-small);
 
     background-color: var(--ternary-color);
 
     width: 85%;
-    height: 70%;
+    height: 70vh;
+    min-height: 500px;
     padding: 1rem;
+
+    overflow-y: scroll;
 
     display: flex;
     align-items: center;
@@ -32,6 +37,12 @@
         margin: 2rem 0;
 
         border-bottom: solid 2px var(--ternary-color);
+    }
+
+    app-talking-effect {
+        position: sticky;
+        z-index: 10;
+        top: 10px;
     }
 }
 
@@ -179,4 +190,4 @@ button {
     100% {
         transform: scale(1);
     }
-}
+} 

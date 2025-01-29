@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   @ViewChild('languageSelect') languageSelect!: ElementRef;
 
   private recognition: any;
+  private assistantResponse: string = "";
   private finalTranscript = '';
   private interimTranscript = '';
   private text = '';
@@ -80,10 +81,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     this.chatService.getResponse(this.text, this.conversationHistory).then(response => {
       this.conversationHistory.push({ user: this.text });
-      this.conversationHistory.push({ assistant: response as string });
 
       if (response !== null) {
         this.synthesizeText(response);
+        this.assistantResponse = response;
       }
       else {
         console.log("error ocurred");
@@ -118,9 +119,18 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (!this.text.trim()) return;
 
     this.speechService.synthesizeTextToSpeech(textToSynthesize, this.language)
-      .then((audioBlob) => {
+      .then(async (audioBlob) => {
         this.audioUrl = URL.createObjectURL(audioBlob);
         this.runAnimation = true;
+
+        this.conversationHistory.push({ assistant: this.assistantResponse as string });
+        
+        await this.sleep(500);
+        const contentContainer = document.getElementsByClassName("content")[0];
+
+        if (contentContainer) {
+          contentContainer.scrollTop = contentContainer.scrollHeight;
+        }
 
         this.text = ""
         this.finalTranscript = ""
@@ -134,5 +144,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   stopAnimation(): void {
     this.runAnimation = false;
+  }
+
+  sleep(ms: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 }
