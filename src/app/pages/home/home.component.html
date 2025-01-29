@@ -1,16 +1,33 @@
 <div class="container">
-  <app-talking-effect [audioURL]="audioUrl" [showAnimation]="runAnimation" (event)="stopAnimation()" />
 
   <div class="content">
-    <div class="controlers">
+    <app-talking-effect [audioURL]="audioUrl" [showAnimation]="runAnimation" (event)="stopAnimation()" />
+    
+    <span class="line"></span>
+    
+    <div class="messages">
+      <p class="bot-message">
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur, asperiores.
+      </p>
+      <div class="contains-user-message">
+        <p class="user-message">
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur, asperiores.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-controllers">
+    <div class="controllers">
       <div class="contains-micro-indicator">
         <button #startBtn (click)="onStartButtonClick()">
           <img src="/assets/images/microfone.svg" alt="">
         </button>
+
         <span [style.animationDuration.s]="isRecording ? .8 : 0"></span>
         <span [style.animationDuration.s]="isRecording ? 1.8 : 0"></span>
-
       </div>
+
       <select #languageSelect>
         <option value="pt-BR">Português</option>
         <option value="en-US">Inglês</option>
@@ -18,7 +35,7 @@
         <option value="es-ES">Espanhol</option>
       </select>
     </div>
-    <div id="transcription" #transcription>
-    </div>
+
+    <div id="transcription" #transcription></div>
   </div>
 </div>

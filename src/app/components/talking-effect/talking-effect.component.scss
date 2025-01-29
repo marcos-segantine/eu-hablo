@@ -3,17 +3,20 @@
     align-items: center;
     gap: .5rem;
 
-    min-height: 10rem;
+    min-height: 5rem;
 }
 
 .circle {
     width: .8rem;
     height: 2.5rem;
-    background-color: white;
+
+    background-color: var(--primary-color);
     border-radius: var(--border-radius-small);
+
     transform: scale(1);
-    opacity: 0.8;
     transition: transform 0.1s ease, opacity 0.1s ease;
+
+    opacity: 0.8;
 }
 
 .controls {
