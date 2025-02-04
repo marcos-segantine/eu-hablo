@@ -1,6 +1,8 @@
 import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { Router } from '@angular/router';
+
 import {
   MsalService,
   MsalModule,
@@ -37,7 +39,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(
     @Inject(MSAL_GUARD_CONFIG) private msalGuardConfig: MsalGuardConfiguration,
     private authService: MsalService,
-    private msalBroadcastService: MsalBroadcastService
+    private msalBroadcastService: MsalBroadcastService,
+    private route: Router
   ) { }
 
   ngOnInit(): void {
@@ -71,11 +74,19 @@ export class HomeComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.setLoginDisplay();
         this.checkAndSetActiveAccount();
+
+        if (!this.loginDisplay) {
+          this.loginRedirect();
+        }
       });
   }
 
   setLoginDisplay() {
     this.loginDisplay = this.authService.instance.getAllAccounts().length > 0;
+
+    if (this.loginDisplay) {
+      this.route.navigate(['/chat']);
+    }
   }
 
   checkAndSetActiveAccount() {
