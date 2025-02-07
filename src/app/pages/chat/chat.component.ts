@@ -22,7 +22,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   private assistantResponse: string = "";
   private finalTranscript = '';
   private interimTranscript = '';
-  private language: "pt-BR" | "en-US" | "it-IT" | "es-ES" | "fr-FR" = 'en-US';
+  private language: "pt-BR" | "en-US" | "it-IT" | "es-ES" | "fr-FR" | "zh-CN" = 'pt-BR';
   private holdTimeout: any;
   text = '';
   conversationHistory: Array<Record<string, string>> = [];

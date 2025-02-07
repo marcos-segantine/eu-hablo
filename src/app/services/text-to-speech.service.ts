@@ -17,7 +17,7 @@ export class SpeechService {
     );
   }
 
-  synthesizeTextToSpeech(text: string, language: "pt-BR" | "en-US" | "it-IT" | "es-ES" | "fr-FR"): Promise<Blob> {
+  synthesizeTextToSpeech(text: string, language: "pt-BR" | "en-US" | "it-IT" | "es-ES" | "fr-FR" | "zh-CN"): Promise<Blob> {
     this.speechConfig.speechSynthesisVoiceName = this.getLanguage(language);
 
     return new Promise((resolve, reject) => {
