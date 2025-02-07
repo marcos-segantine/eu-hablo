@@ -20,9 +20,11 @@
     "@angular/router": "^19.0.0",
     "@azure/msal-angular": "^4.0.2",
     "@azure/msal-browser": "^4.0.2",
+    "assert": "^2.1.0",
     "microsoft-cognitiveservices-speech-sdk": "^1.42.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
+    "url": "^0.11.4",
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
